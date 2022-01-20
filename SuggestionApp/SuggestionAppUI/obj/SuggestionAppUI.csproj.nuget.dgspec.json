@@ -43,6 +43,16 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Identity.Web": {
+              "target": "Package",
+              "version": "[1.21.1, )"
+            },
+            "Microsoft.Identity.Web.UI": {
+              "target": "Package",
+              "version": "[1.21.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
