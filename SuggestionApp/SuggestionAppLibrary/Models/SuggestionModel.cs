@@ -10,5 +10,10 @@ public class SuggestionModel
     public DateTime DateCreated { get; set; } = DateTime.UtcNow;
     public CategoryModel Category { get; set; }
     public string Author { get; set; }
-    public int UserVotes { get; set; }
+    public HashSet<string> UserVotes { get; set; } = new();
+    public StatusModel SuggestionStatus { get; set; }
+    public string OwnerNotes { get; set; }
+    public bool ApprovedForRelease { get; set; } = false;
+    public bool Archived { get; set; } = false;
+    public bool Rejected { get; set; } = false;
 }
