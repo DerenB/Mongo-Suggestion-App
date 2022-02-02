@@ -10,6 +10,6 @@ public class UserModel
     public string LastName { get; set; }
     public string DisplayName { get; set; }
     public string EmailAddress { get; set; }
-    public List<SuggestionModel> AuthorSuggestions { get; set; } = new();
-    public List<SuggestionModel> VotedOnSuggestions { get; set; } = new();
+    public List<BasicSuggestionModel> AuthorSuggestions { get; set; } = new();
+    public List<BasicSuggestionModel> VotedOnSuggestions { get; set; } = new();
 }
