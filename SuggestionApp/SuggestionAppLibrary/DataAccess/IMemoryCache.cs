@@ -1,5 +1,5 @@
 ﻿namespace SuggestionAppLibrary.DataAccess;
 
-public interface IMemoryCash
+public interface IMemoryCache
 {
 }
