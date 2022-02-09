@@ -28,7 +28,12 @@ public class MongoSuggestionData
 
             _cache.Set(CacheName, output, TimeSpan.FromMinutes(1));
         }
-
         return output;
+    }
+
+    public async Task<List<SuggestionModel>> GetAllApprovedSuggestions()
+    {
+        var output = await GetAllSuggestions();
+        return output.Where(x => x.ApprovedForRelease).ToList();
     }
 }
