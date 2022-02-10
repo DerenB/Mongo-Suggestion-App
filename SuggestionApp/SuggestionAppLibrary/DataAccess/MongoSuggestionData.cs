@@ -2,7 +2,7 @@
 
 namespace SuggestionAppLibrary.DataAccess;
 
-public class MongoSuggestionData
+public class MongoSuggestionData : ISuggestionData
 {
     private readonly IDbConnection _db;
     private readonly IUserData _userData;
@@ -21,7 +21,7 @@ public class MongoSuggestionData
     public async Task<List<SuggestionModel>> GetAllSuggestions()
     {
         var output = _cache.Get<List<SuggestionModel>>(CacheName);
-        if(output is null)
+        if (output is null)
         {
             var results = await _suggestions.FindAsync(s => s.Archived == false);
             output = results.ToList();
@@ -46,8 +46,8 @@ public class MongoSuggestionData
     public async Task<List<SuggestionModel>> GetAllSuggestionsWaitingForApproval()
     {
         var output = await GetAllSuggestions();
-        return output.Where(x => 
-            x.ApprovedForRelease == false 
+        return output.Where(x =>
+            x.ApprovedForRelease == false
             && x.Rejected == false).ToList();
     }
 
@@ -71,7 +71,7 @@ public class MongoSuggestionData
             var suggestion = (await suggestionsInTransaction.FindAsync(s => s.Id == suggestionId)).First();
 
             bool isUpvote = suggestion.UserVotes.Add(userId);
-            if(isUpvote == false)
+            if (isUpvote == false)
             {
                 suggestion.UserVotes.Remove(userId);
             }
@@ -84,7 +84,7 @@ public class MongoSuggestionData
             if (isUpvote)
             {
                 user.VotedOnSuggestions.Add(new BasicSuggestionModel(suggestion));
-            } 
+            }
             else
             {
                 var suggestionToRemove = user.VotedOnSuggestions.Where(s => s.Id == suggestionId).First();
