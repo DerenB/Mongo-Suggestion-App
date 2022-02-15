@@ -59,7 +59,44 @@
 
     private async Task FilterSuggestions()
     {
-        
+        // Page will only show approved suggestions
+        var output = await suggestionData.GetAllApprovedSuggestions();
+
+        if (selectedCategory != "All")
+        {
+            // Will filter the category name if it has one
+            output = output.Where(S => S.Category?.CategoryName == selectedCategory).ToList();
+        }
+
+        if (selectedStatus != "All")
+        {
+            output = output.Where(s => s.SuggestionStatus?.StatusName == selectedStatus).ToList();
+        }
+
+        // If there is text in the search text, search algorithm
+        if (string.IsNullOrWhiteSpace(searchText) == false)
+        {
+            output = output.Where(
+                s => s.Suggestion.Contains(searchText, StringComparison.InvariantCultureIgnoreCase) ||
+                s.Description.Contains(searchText, StringComparison.InvariantCultureIgnoreCase)
+            ).ToList();
+        }
+
+        if (isSortedByNew)
+        {
+            // Sorts by new
+            output = output.OrderByDescending(s => s.DateCreated).ToList();
+        } else
+        {
+            // Sorts by Vote Counts > Date Created
+            output = output.OrderByDescending(s => s.UserVotes.Count)
+                .ThenByDescending(s => s.DateCreated).ToList();
+        }
+
+        // Filling suggestion list with filtered set
+        suggestions = output;
+
+        await SaveFilterState();
     }
 
 }
