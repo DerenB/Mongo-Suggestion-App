@@ -57,6 +57,15 @@
         isSortedByNew = boolResults.Success ? boolResults.Value : true;
     }
 
+    // Saves the Filter selections
+    private async Task SaveFilterState()
+    {
+        await sessionStorage.SetAsync(nameof(selectedCategory), selectedCategory);
+        await sessionStorage.SetAsync(nameof(selectedStatus), selectedStatus);
+        await sessionStorage.SetAsync(nameof(searchText), searchText);
+        await sessionStorage.SetAsync(nameof(isSortedByNew), isSortedByNew);
+    }
+
     private async Task FilterSuggestions()
     {
         // Page will only show approved suggestions
