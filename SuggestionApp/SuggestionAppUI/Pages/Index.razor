@@ -25,4 +25,16 @@
         statuses = await statusData.GetAllStatuses();
     }
 
+    // Calling the methods to load the suggestions
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Will render the first time
+            await LoadFilterState();
+            await FilterSuggestions();
+            StateHasChanged();
+        }
+    }
+
 }
