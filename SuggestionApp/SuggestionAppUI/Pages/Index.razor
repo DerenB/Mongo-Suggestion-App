@@ -37,4 +37,29 @@
         }
     }
 
+    // Loads the filter state
+    private async Task LoadFilterState()
+    {
+        var stringResults = await sessionStorage.GetAsync<string>(nameof(selectedCategory));
+        // Either going to be the value of what's in the cache, or it will be All
+        selectedCategory = stringResults.Success ? stringResults.Value : "All";
+
+        stringResults = await sessionStorage.GetAsync<string>(nameof(selectedStatus));
+        // Either going to be the value of what's in the cache, or it will be All
+        selectedStatus = stringResults.Success ? stringResults.Value : "All";
+
+        stringResults = await sessionStorage.GetAsync<string>(nameof(searchText));
+        // Either going to be the value of what's in the cache, or it will be All
+        searchText = stringResults.Success ? stringResults.Value : "";
+
+        var boolResults = await sessionStorage.GetAsync<bool>(nameof(isSortedByNew));
+        // Either going to be the value of what's in the cache, or it will be All
+        isSortedByNew = boolResults.Success ? boolResults.Value : true;
+    }
+
+    private async Task FilterSuggestions()
+    {
+        
+    }
+
 }
