@@ -108,4 +108,9 @@
         await SaveFilterState();
     }
 
+    private async Task OrderByNew(bool isNew)
+    {
+        isSortedByNew = isNew;
+        await FilterSuggestions();
+    }
 }
