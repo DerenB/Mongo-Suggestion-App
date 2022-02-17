@@ -65,6 +65,36 @@
             </Virtualize>
         }
     </div>
+    <div>
+        <!-- Will list the categories -->
+        @if (categories is not null)
+        {
+            <div>
+                <span>Category</span>
+                <!-- Going to list all -->
+                <div @onclick="(() => OnCategoryClick())">All</div>
+                @foreach(var c in categories)
+                {
+                    <!-- Will change the category name -->
+                    <div @onclick="(() => OnCategoryClick(c.CategoryName))">@c.CategoryName</div>
+                }
+            </div>
+        }
+        <!-- Will list the statuses -->
+        @if (statuses is not null)
+        {
+            <div>
+                <span>Status</span>
+                <!-- Going to list all -->
+                <div @onclick="(() => OnStatusClick())">All</div>
+                @foreach(var s in statuses)
+                {
+                    <!-- Will change the category name -->
+                    <div @onclick="(() => OnStatusClick(s.StatusName))">@s.StatusName</div>
+                }
+            </div>
+        }
+    </div>
 </div>
 
 
