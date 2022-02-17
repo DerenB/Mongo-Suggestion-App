@@ -30,6 +30,43 @@
     </div>
 </div>
 
+<div>
+    <div>
+        <!-- If there are suggestions available -->
+        @if (suggestions is not null)
+        {
+            <!-- Will render only the elements that load on the page plus 10 -->
+            <!-- The entire list will be loaded into memory -->
+            <Virtualize Items="@suggestions" Context="s" OverscanCount="10">
+                <div>
+                    <div>
+                        <div>@GetUpvoteTopText(s)</div>
+                        <span class="oi oi-caret-top"></span>
+                        <div>@GetUpvoteBottomText(s)</div>
+                    </div>
+                    <div>
+                        <!-- On click for a suggestion -->
+                        <div @onclick="(() => OpenDetails(s))">
+                            @s.Suggestion
+                        </div>
+                        <div>
+                            <!-- On click for a category name -->
+                            <div @onclick="(() => OpenDetails(s))">
+                               @s.Category?.CategoryName
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            @s.SuggestionStatus?.StatusName
+                        </div>
+                    </div>
+                </div>
+            </Virtualize>
+        }
+    </div>
+</div>
+
 
 @code {
     // Data Points
