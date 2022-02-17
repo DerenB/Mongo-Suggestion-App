@@ -6,6 +6,31 @@
 @inject NavigationManager navManager
 @inject ProtectedSessionStorage sessionStorage
 
+<h1>Training Suggestions</h1>
+<div>
+    <button>Suggest</button>
+</div>
+
+<div>
+    <div>
+        <!-- If there are suggestions, it will return the count. -->
+        @suggestions?.Count Suggestions
+    </div>
+    <div>
+        <!-- Buttons for ordering the suggestions -->
+        <button @onclick="(() => OrderByNew(true))">New</button>
+        <button @onclick="(() => OrderByNew(false))">Popular</button>
+    </div>
+    <div>
+        <!-- Search Box -->
+        <!-- When there is an input, it will take the entire value as input to the OnSearchInput -->
+        <!-- Will call the method everytime a letter is hit -->
+        <input type="text" placeholder="Search" 
+            aria-label="Search Box" @oninput="((txt) => OnSearchInput((string)txt.Value))" />
+    </div>
+</div>
+
+
 @code {
     // Data Points
     private List<SuggestionModel> suggestions;
