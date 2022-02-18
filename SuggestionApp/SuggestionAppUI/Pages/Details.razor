@@ -1,0 +1,15 @@
+﻿@page "/Details/{Id}"
+@inject ISuggestionData suggestionData
+@inject NavigationManager navManager
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private SuggestionModel suggestion;
+
+    protected async override Task OnInitializedAsync()
+    {
+        suggestion = await suggestionData.GetSuggestion(Id);
+    }
+}
