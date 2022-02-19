@@ -1,0 +1,17 @@
+﻿<!-- Page will be restricted to only be accessible to people logged in-->
+
+@page "/Create"
+@using SuggestionAppUI.Models
+@inject ICategoryData categoryData
+@inject ISuggestionData suggestionData
+@inject NavigationManager navManager
+
+@code {
+    private CreateSuggestionModel suggestion = new();
+    private List<CategoryModel> categories;
+
+    protected async override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+}
